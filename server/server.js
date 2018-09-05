@@ -1,4 +1,6 @@
 var express = require('express');
+// mporting objectid
+var {ObjectId} = require('mongodb');
 
 //used to send the json to server
 var bodyParser = require('body-parser');
@@ -29,7 +31,22 @@ app.get('/todos', (req, res)=>{
          res.send({todos});
     },(e)=>{
         res.status(400).send(e);
-    })
+    });
+});
+
+app.get('/todos/:id', (req, res)=>{
+    var id = req.params.id;
+    // valid id using isValid
+    if(!ObjectId.isValid(id)){
+        return res.status(404).send();
+
+    }
+    
+    Todo.findById(id).then((todo)=>{
+        if(!todo) return res.status(404).send();
+        console.log('Todo', todo);
+        res.send({todo});
+    }).catch((e)=>{res.status(404).send()});
 });
 
 
