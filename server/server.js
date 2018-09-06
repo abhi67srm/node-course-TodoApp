@@ -5,6 +5,9 @@ var {ObjectId} = require('mongodb');
 //used to send the json to server
 var bodyParser = require('body-parser');
 
+//port
+const port = process.env.port || 3000;
+
 
 //load in mongoose
 var {mongoose} = require('./db/mongoose');
@@ -51,8 +54,8 @@ app.get('/todos/:id', (req, res)=>{
 
 
 
-app.listen('3000',()=>{
-    console.log('Started on port 3000');
+app.listen(port,()=>{
+    console.log(`Started up at port ${port}`);
 });
 
 module.exports = {app};
