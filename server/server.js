@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 //port
 const port = process.env.port || 3000;
+const host = process.env.host || 'localhost';
 
 
 //load in mongoose
@@ -54,7 +55,7 @@ app.get('/todos/:id', (req, res)=>{
 
 
 
-app.listen(port,()=>{
+app.listen(port || host,  ()=>{
     console.log(`Started up at port ${port}`);
 });
 
