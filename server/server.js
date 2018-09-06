@@ -6,8 +6,7 @@ var {ObjectId} = require('mongodb');
 var bodyParser = require('body-parser');
 
 //port
-const port = process.env.port || 3000;
-const host = process.env.host || 'localhost';
+const port = process.env.PORT || 3000;
 
 
 //load in mongoose
@@ -55,7 +54,7 @@ app.get('/todos/:id', (req, res)=>{
 
 
 
-app.listen(port || host,  ()=>{
+app.listen(port ,  ()=>{
     console.log(`Started up at port ${port}`);
 });
 
