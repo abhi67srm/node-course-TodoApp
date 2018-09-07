@@ -26,7 +26,7 @@ app.post('/todos', (req, res)=>{
         res.send(JSON.stringify(doc, undefined, 2));
     },(e)=>{
          res.status(400).send(e);
-    })
+    });
 });
 
 app.get('/todos', (req, res)=>{
