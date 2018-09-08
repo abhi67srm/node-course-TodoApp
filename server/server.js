@@ -1,3 +1,5 @@
+require('./config/config');
+//do not make server file complex
 const _=require('lodash');
 var express = require('express');
 // mporting objectid
@@ -7,7 +9,7 @@ var {ObjectId} = require('mongodb');
 var bodyParser = require('body-parser');
 
 //port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT ;
 
 
 //load in mongoose
