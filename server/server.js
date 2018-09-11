@@ -4,6 +4,7 @@ const _=require('lodash');
 var express = require('express');
 // mporting objectid
 var {ObjectId} = require('mongodb');
+var {authenticate} = require('./middleware/authenticate');
 
 //used to send the json to server
 var bodyParser = require('body-parser');
@@ -96,7 +97,8 @@ app.patch('/todos/:id', (req, res)=>{
        res.send({todo});
       
    }).catch((e)=>{
-       res.status(404).send();
+       //401 means authentication is required
+       res.status(401).send();
    });
 
 
@@ -115,6 +117,25 @@ app.post('/users', (req, res)=>{
         res.status(400).send(e);
      });
 
+});
+//actual route would not get call untill it get authenticated
+
+
+app.get('/users/me',authenticate, (req, res)=>{
+    // var token  = req.header('x-auth');
+
+
+    // user.findByToken(token).then((User)=>{
+    //     if(!User){
+    //         // res.status(401).send();
+    //         return Promise.reject();
+    //     }
+    //     //happy path
+    //     res.send(User);
+    // }).catch((err)=>{
+    //       res.status(401).send();
+    // });
+    res.send(req.User);
 });
 
 app.listen(port ,  ()=>{
